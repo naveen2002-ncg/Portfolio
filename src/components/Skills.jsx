@@ -2,10 +2,10 @@ import { motion, useScroll, useTransform } from 'framer-motion';
 
 const techList = [
   { name: 'Python', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg', color: '#3776AB' },
-  { name: 'JavaScript', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg', color: '#F7DF1E' },
+  { name: 'JavaScript', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg', color: '#F7DF1E', textColor: '#fff' },
   { name: 'TypeScript', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg', color: '#3178C6' },
   { name: 'React', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg', color: '#61DAFB' },
-  { name: 'Node.js', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg', color: '#68A063' },
+  { name: 'Node.js', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg', color: '#68A063', textColor: '#fff' },
   { name: 'HTML5', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg', color: '#E34F26' },
   { name: 'CSS3', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg', color: '#1572B6' },
   { name: 'Git', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg', color: '#F05032' },
@@ -198,7 +198,7 @@ function CategoryCard({ category, index }) {
 }
 
 function AnimatedTechLogo({ tech, index }) {
-  const textColor = ['#F7DF1E', '#61DAFB', '#FFCA28', '#FCC624', '#68A063', '#8B949E'].includes(tech.color) ? '#0b080c' : '#fff';
+  const textColor = tech.textColor || (['#F7DF1E', '#61DAFB', '#FFCA28', '#FCC624', '#68A063', '#8B949E'].includes(tech.color) ? '#0b080c' : '#fff');
   return (
     <motion.div
       initial={{ opacity: 0, scale: 0.8, rotate: -10 }}

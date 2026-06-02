@@ -249,7 +249,7 @@ export default function Hero() {
               transition={{ duration: 15, repeat: Infinity, ease: 'linear' }}
             />
             <img
-              src="/profile.jpg"
+              src="/Portfolio/profile.jpg"
               alt="Naveen C Gundapalli"
               style={{
                 width: '100%',
