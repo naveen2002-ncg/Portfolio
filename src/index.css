@@ -249,27 +249,52 @@ a:hover {
   box-shadow: 0 0 10px rgba(168, 85, 247, 0.3);
 }
 
-.tech-chip {
+.tech-badge {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  padding: 10px 14px;
+  padding: 10px 16px;
   border-radius: 14px;
   background: rgba(255, 255, 255, 0.02);
   border: 1px solid rgba(255, 255, 255, 0.04);
-  backdrop-filter: blur(8px);
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
   cursor: default;
-  min-width: 100px;
-  flex: 1 1 100px;
-  justify-content: center;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.tech-chip:hover {
-  border-color: var(--border-hover);
+.tech-badge:hover {
+  border-color: rgba(168, 85, 247, 0.3);
+  background: rgba(255, 255, 255, 0.05);
+  box-shadow: 0 0 20px rgba(168, 85, 247, 0.15), 0 12px 32px rgba(0, 0, 0, 0.4);
   transform: translateY(-4px);
-  box-shadow: 0 0 20px var(--accent-glow), 0 12px 32px rgba(0, 0, 0, 0.4);
-  background: rgba(255, 255, 255, 0.04);
+}
+
+.tech-badge-icon {
+  width: 20px;
+  height: 20px;
+  object-fit: contain;
+  opacity: 0.5;
+  filter: grayscale(100%);
+  transition: all 0.3s ease;
+}
+
+.tech-badge:hover .tech-badge-icon {
+  opacity: 1;
+  filter: grayscale(0%);
+}
+
+.tech-badge-label {
+  font-size: 0.78rem;
+  font-weight: 500;
+  font-family: 'Fira Code', monospace;
+  color: var(--text-secondary);
+  transition: color 0.3s ease;
+  white-space: nowrap;
+}
+
+.tech-badge:hover .tech-badge-label {
+  color: var(--text-primary);
 }
 
 .project-card {
