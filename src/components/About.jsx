@@ -68,6 +68,191 @@ function Particle({ delay, x, y, size, color }) {
   );
 }
 
+function LeftSideDecoration() {
+  return (
+    <div style={{
+      position: 'absolute',
+      left: 0,
+      top: 0,
+      bottom: 0,
+      width: '300px',
+      zIndex: 0,
+      pointerEvents: 'none',
+      overflow: 'hidden',
+    }}>
+      <motion.div
+        style={{
+          position: 'absolute',
+          left: '-50px',
+          top: '10%',
+          width: '200px',
+          height: '200px',
+          borderRadius: '50%',
+          background: 'radial-gradient(circle, rgba(124, 92, 252, 0.2) 0%, transparent 70%)',
+          filter: 'blur(40px)',
+        }}
+        animate={{
+          y: [0, 30, -20, 0],
+          scale: [1, 1.2, 0.9, 1],
+        }}
+        transition={{
+          duration: 6,
+          repeat: Infinity,
+          ease: 'easeInOut',
+        }}
+      />
+      <motion.div
+        style={{
+          position: 'absolute',
+          left: '-30px',
+          top: '50%',
+          width: '150px',
+          height: '150px',
+          borderRadius: '50%',
+          background: 'radial-gradient(circle, rgba(168, 85, 247, 0.15) 0%, transparent 70%)',
+          filter: 'blur(35px)',
+        }}
+        animate={{
+          y: [0, -25, 15, 0],
+          scale: [1, 1.15, 0.95, 1],
+        }}
+        transition={{
+          duration: 7,
+          repeat: Infinity,
+          ease: 'easeInOut',
+        }}
+      />
+      <motion.div
+        style={{
+          position: 'absolute',
+          left: '-40px',
+          bottom: '15%',
+          width: '180px',
+          height: '180px',
+          borderRadius: '50%',
+          background: 'radial-gradient(circle, rgba(247, 85, 144, 0.15) 0%, transparent 70%)',
+          filter: 'blur(45px)',
+        }}
+        animate={{
+          y: [0, 20, -15, 0],
+          scale: [1, 1.1, 0.95, 1],
+        }}
+        transition={{
+          duration: 8,
+          repeat: Infinity,
+          ease: 'easeInOut',
+        }}
+      />
+
+      <svg style={{
+        position: 'absolute',
+        left: '20px',
+        top: '20%',
+        width: '80px',
+        height: '80px',
+        opacity: 0.3,
+      }} viewBox="0 0 100 100">
+        <motion.circle
+          cx="50" cy="50" r="40"
+          fill="none"
+          stroke="#7c5cfc"
+          strokeWidth="1"
+          strokeDasharray="10 5"
+          animate={{
+            rotate: 360,
+            opacity: [0.2, 0.5, 0.2],
+          }}
+          transition={{
+            duration: 12,
+            repeat: Infinity,
+            ease: 'linear',
+          }}
+          style={{ transformOrigin: '50px 50px' }}
+        />
+      </svg>
+
+      <svg style={{
+        position: 'absolute',
+        left: '40px',
+        top: '55%',
+        width: '60px',
+        height: '60px',
+        opacity: 0.25,
+      }} viewBox="0 0 100 100">
+        <motion.rect
+          x="20" y="20" width="60" height="60"
+          fill="none"
+          stroke="#a855f7"
+          strokeWidth="1"
+          rx="10"
+          animate={{
+            rotate: -360,
+            opacity: [0.2, 0.4, 0.2],
+          }}
+          transition={{
+            duration: 15,
+            repeat: Infinity,
+            ease: 'linear',
+          }}
+          style={{ transformOrigin: '50px 50px' }}
+        />
+      </svg>
+
+      <svg style={{
+        position: 'absolute',
+        left: '10px',
+        bottom: '25%',
+        width: '70px',
+        height: '70px',
+        opacity: 0.3,
+      }} viewBox="0 0 100 100">
+        <motion.polygon
+          points="50,10 90,90 10,90"
+          fill="none"
+          stroke="#f75590"
+          strokeWidth="1.5"
+          animate={{
+            rotate: 360,
+            opacity: [0.2, 0.5, 0.2],
+          }}
+          transition={{
+            duration: 10,
+            repeat: Infinity,
+            ease: 'linear',
+          }}
+          style={{ transformOrigin: '50px 63px' }}
+        />
+      </svg>
+
+      {Array.from({ length: 15 }).map((_, i) => (
+        <motion.div
+          key={i}
+          style={{
+            position: 'absolute',
+            left: `${10 + Math.random() * 40}px`,
+            top: `${Math.random() * 100}%`,
+            width: 2 + Math.random() * 3,
+            height: 2 + Math.random() * 3,
+            borderRadius: '50%',
+            background: ['#7c5cfc', '#a855f7', '#f75590', '#4f8ef7', '#c2a4ff'][i % 5],
+            boxShadow: `0 0 6px ${['#7c5cfc', '#a855f7', '#f75590', '#4f8ef7', '#c2a4ff'][i % 5]}`,
+          }}
+          animate={{
+            y: [0, -20, 15, -10, 20, 0],
+            opacity: [0, 0.6, 0.3, 0.7, 0.2, 0],
+          }}
+          transition={{
+            duration: 3 + i * 0.5,
+            repeat: Infinity,
+            delay: i * 0.3,
+            ease: 'easeInOut',
+          }}
+        />
+      ))}
+    </div>
+  );
+}
+
 export default function About() {
   const { scrollY } = useScroll();
   const bgY = useTransform(scrollY, [0, 800], [0, -60]);
@@ -95,6 +280,8 @@ export default function About() {
           <Particle key={p.id} {...p} />
         ))}
       </motion.div>
+
+      <LeftSideDecoration />
 
       <div style={{ position: 'relative', zIndex: 1 }}>
         <motion.div
