@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion';
+import RightSideDecoration from './RightSideDecoration';
 
 const education = [
   {
@@ -100,7 +101,11 @@ export default function Education() {
   return (
     <section className="section" id="education" style={{
       textAlign: 'center',
+      position: 'relative',
+      overflow: 'hidden',
     }}>
+      <RightSideDecoration type="education" />
+      <div style={{ position: 'relative', zIndex: 1 }}>
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -122,6 +127,7 @@ export default function Education() {
         {education.map((item, i) => (
           <EduCard key={item.degree} item={item} index={i} />
         ))}
+      </div>
       </div>
     </section>
   );

@@ -282,6 +282,7 @@ export default function About() {
       </motion.div>
 
       <LeftSideDecoration />
+      <RightSideDecoration type="about" />
 
       <div style={{ position: 'relative', zIndex: 1 }}>
         <motion.div

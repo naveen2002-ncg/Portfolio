@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion';
+import RightSideDecoration from './RightSideDecoration';
 
 const certifications = [
   { title: 'Google Cloud Generative AI', issuer: 'Google Cloud', date: '2025', id: 'GC-2025-GA' },
@@ -131,6 +132,7 @@ export default function Certifications() {
       </div>
 
       <div style={{ position: 'relative', zIndex: 1 }}>
+        <RightSideDecoration type="certifications" />
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}

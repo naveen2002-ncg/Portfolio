@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion';
+import RightSideDecoration from './RightSideDecoration';
 
 const experiences = [
   {
@@ -232,6 +233,7 @@ export default function Experience() {
       </div>
 
       <LeftSideDecoration />
+      <RightSideDecoration type="experience" />
 
       <div style={{ position: 'relative', zIndex: 1 }}>
         <motion.div
