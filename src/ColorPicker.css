@@ -1,0 +1,54 @@
+.container {
+  padding: 40px;
+}
+
+h2 {
+  font-size: 50px;
+  font-weight: bold;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.color-box {
+  width: 500px;
+  padding: 30px;
+  background: white;
+  border-radius: 20px;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+}
+
+.select-btn {
+  padding: 15px 40px;
+  border: none;
+  border-radius: 12px;
+  font-size: 22px;
+  background: #f2f2f2;
+  cursor: pointer;
+  margin-bottom: 40px;
+}
+
+.color-list {
+  display: flex;
+  gap: 30px;
+}
+
+.circle {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  border: 2px solid #ddd;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.circle:hover {
+  transform: scale(1.05);
+}
+
+.circle.active {
+  border: 4px solid black;
+}
+p {
+  font-size: 22px;
+  font-weight: bold;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}

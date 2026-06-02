@@ -1,0 +1,14 @@
+.wel-msg {
+  background-color: lightgreen;
+  color: rgb(0, 0, 0);
+  padding: 10px;
+  border-radius: 5px;
+  text-align: center;
+}
+.login-msg {
+  background-color: lightcoral;
+  color: rgb(0, 0, 0);
+  padding: 5px;
+  border-radius: 5px;
+  text-align: center;
+}
