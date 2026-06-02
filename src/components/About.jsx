@@ -1,4 +1,5 @@
 import { motion, useScroll, useTransform } from 'framer-motion';
+import RightSideDecoration from './RightSideDecoration';
 
 const floatingOrbs = [
   { size: 300, x: '10%', y: '20%', color: '#7c5cfc', duration: 8 },
