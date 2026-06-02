@@ -1,4 +1,4 @@
-import { motion } from 'framer-motion';
+import { motion, useScroll, useTransform } from 'framer-motion';
 
 function SocialIcon({ href, label, icon }) {
   const svg = {
@@ -13,9 +13,69 @@ function SocialIcon({ href, label, icon }) {
       target={href.startsWith('http') ? '_blank' : undefined}
       rel={href.startsWith('http') ? 'noopener noreferrer' : undefined}
       className="social-btn"
-      whileHover={{ scale: 1.05 }}
+      whileHover={{ scale: 1.1, y: -2 }}
       whileTap={{ scale: 0.95 }}
       dangerouslySetInnerHTML={{ __html: svg[icon] || '' }}
+    />
+  );
+}
+
+function ColorfulOrb({ size, x, y, color, delay }) {
+  return (
+    <motion.div
+      style={{
+        position: 'absolute',
+        width: size,
+        height: size,
+        borderRadius: '50%',
+        background: `radial-gradient(circle, ${color}35 0%, transparent 70%)`,
+        left: x,
+        top: y,
+        filter: 'blur(50px)',
+        pointerEvents: 'none',
+        zIndex: 0,
+      }}
+      animate={{
+        x: [0, 30, -20, 15, -25, 0],
+        y: [0, -20, 30, -15, 25, 0],
+        scale: [1, 1.2, 0.9, 1.15, 0.95, 1],
+        opacity: [0.3, 0.6, 0.4, 0.7, 0.3, 0.5],
+      }}
+      transition={{
+        duration: 8 + delay,
+        repeat: Infinity,
+        delay: delay * 0.5,
+        ease: 'easeInOut',
+      }}
+    />
+  );
+}
+
+function Sparkle({ x, y, delay, color }) {
+  return (
+    <motion.div
+      style={{
+        position: 'absolute',
+        width: 3,
+        height: 3,
+        borderRadius: '50%',
+        background: color,
+        left: x,
+        top: y,
+        pointerEvents: 'none',
+        zIndex: 0,
+        boxShadow: `0 0 8px ${color}`,
+      }}
+      animate={{
+        scale: [0, 1.5, 0],
+        opacity: [0, 1, 0],
+      }}
+      transition={{
+        duration: 2.5,
+        repeat: Infinity,
+        delay: delay,
+        ease: 'easeInOut',
+      }}
     />
   );
 }
@@ -31,16 +91,24 @@ export default function Hero() {
       padding: '120px 0 80px',
       overflow: 'hidden',
     }}>
-      <div style={{
-        position: 'absolute',
-        top: '20%',
-        left: '50%',
-        transform: 'translate(-50%, -50%)',
-        width: '600px',
-        height: '600px',
-        background: 'radial-gradient(circle, rgba(194, 164, 255, 0.08) 0%, transparent 70%)',
-        pointerEvents: 'none',
-      }} />
+      <div style={{ position: 'absolute', inset: 0, zIndex: 0, pointerEvents: 'none' }}>
+        <ColorfulOrb size={500} x="15%" y="25%" color="#7c5cfc" delay={0} />
+        <ColorfulOrb size={400} x="65%" y="60%" color="#a855f7" delay={1} />
+        <ColorfulOrb size={350} x="40%" y="70%" color="#f75590" delay={2} />
+        <ColorfulOrb size={300} x="75%" y="15%" color="#4f8ef7" delay={0.5} />
+        <ColorfulOrb size={250} x="25%" y="50%" color="#c2a4ff" delay={1.5} />
+        <ColorfulOrb size={200} x="50%" y="30%" color="#f59939" delay={3} />
+
+        {Array.from({ length: 25 }).map((_, i) => (
+          <Sparkle
+            key={i}
+            x={`${Math.random() * 90}%`}
+            y={`${Math.random() * 90}%`}
+            delay={Math.random() * 3}
+            color={['#7c5cfc', '#a855f7', '#f75590', '#4f8ef7', '#c2a4ff', '#f59939'][i % 6]}
+          />
+        ))}
+      </div>
 
       <div style={{
         maxWidth: '1000px',
@@ -59,18 +127,36 @@ export default function Hero() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
         >
-          <div className="about-badge" style={{ marginBottom: '24px' }}>
+          <motion.div
+            className="about-badge"
+            style={{ marginBottom: '24px', display: 'inline-flex' }}
+            animate={{
+              boxShadow: [
+                '0 0 20px rgba(168, 85, 247, 0.2)',
+                '0 0 30px rgba(168, 85, 247, 0.4)',
+                '0 0 20px rgba(168, 85, 247, 0.2)',
+              ],
+            }}
+            transition={{ duration: 2, repeat: Infinity }}
+          >
             <span className="status-dot" />
             Available for opportunities
-          </div>
+          </motion.div>
 
           <h1 className="hero-name tracking-tight" style={{ marginBottom: '16px' }}>
             Hi, I'm <span className="gradient-text">Naveen</span>
           </h1>
 
-          <p className="hero-role" style={{ marginBottom: '20px' }}>
+          <motion.p
+            className="hero-role"
+            style={{ marginBottom: '20px' }}
+            animate={{
+              backgroundPosition: ['0% 50%', '100% 50%', '0% 50%'],
+            }}
+            transition={{ duration: 4, repeat: Infinity }}
+          >
             AI/ML Engineer & Full Stack Developer
-          </p>
+          </motion.p>
 
           <p className="text-muted" style={{
             fontSize: '1rem',
@@ -87,9 +173,37 @@ export default function Hero() {
             flexWrap: 'wrap',
             marginBottom: '36px',
           }}>
-            <a href="#projects" className="btn btn-primary">View Projects →</a>
-            <a href="https://drive.google.com/uc?export=download&id=1033TnDWnze8emo7-mnzufKj7uT58OUy8" target="_blank" rel="noopener noreferrer" className="btn btn-outline">Resume</a>
-            <a href="#contact" className="btn btn-outline">Contact</a>
+            <motion.a
+              href="#projects"
+              className="btn btn-primary"
+              whileHover={{ scale: 1.05, y: -2 }}
+              whileTap={{ scale: 0.95 }}
+              style={{
+                background: 'linear-gradient(135deg, #7c5cfc, #a855f7)',
+                color: '#fff',
+                boxShadow: '0 8px 30px rgba(168, 85, 247, 0.3)',
+              }}
+            >
+              View Projects →
+            </motion.a>
+            <motion.a
+              href="https://drive.google.com/uc?export=download&id=1033TnDWnze8emo7-mnzufKj7uT58OUy8"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn btn-outline"
+              whileHover={{ scale: 1.05, y: -2 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              Resume
+            </motion.a>
+            <motion.a
+              href="#contact"
+              className="btn btn-outline"
+              whileHover={{ scale: 1.05, y: -2 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              Contact
+            </motion.a>
           </div>
 
           <div style={{ display: 'flex', gap: '8px' }}>
@@ -113,12 +227,27 @@ export default function Hero() {
             width: '280px',
             height: '280px',
           }}>
-            <div style={{
-              position: 'absolute',
-              inset: '-8px',
-              borderRadius: '50%',
-              border: '1px solid rgba(194, 164, 255, 0.2)',
-            }} />
+            <motion.div
+              style={{
+                position: 'absolute',
+                inset: '-12px',
+                borderRadius: '50%',
+                background: 'conic-gradient(from 0deg, #7c5cfc, #a855f7, #f75590, #4f8ef7, #c2a4ff, #7c5cfc)',
+                opacity: 0.6,
+              }}
+              animate={{ rotate: 360 }}
+              transition={{ duration: 10, repeat: Infinity, ease: 'linear' }}
+            />
+            <motion.div
+              style={{
+                position: 'absolute',
+                inset: '-6px',
+                borderRadius: '50%',
+                border: '2px solid rgba(168, 85, 247, 0.3)',
+              }}
+              animate={{ rotate: -360 }}
+              transition={{ duration: 15, repeat: Infinity, ease: 'linear' }}
+            />
             <img
               src="/profile.jpg"
               alt="Naveen C Gundapalli"
@@ -129,23 +258,35 @@ export default function Hero() {
                 objectPosition: 'center 25%',
                 borderRadius: '50%',
                 border: '3px solid var(--bg-primary)',
+                position: 'relative',
+                zIndex: 1,
               }}
             />
-            <div style={{
-              position: 'absolute',
-              bottom: '8px',
-              right: '8px',
-              width: '32px',
-              height: '32px',
-              borderRadius: '50%',
-              background: '#4ade80',
-              border: '3px solid var(--bg-primary)',
-              boxShadow: '0 0 12px rgba(74, 222, 128, 0.4)',
-            }} />
+            <motion.div
+              style={{
+                position: 'absolute',
+                bottom: '10px',
+                right: '10px',
+                width: '32px',
+                height: '32px',
+                borderRadius: '50%',
+                background: '#4ade80',
+                border: '3px solid var(--bg-primary)',
+                zIndex: 2,
+                boxShadow: '0 0 12px rgba(74, 222, 128, 0.5)',
+              }}
+              animate={{
+                boxShadow: [
+                  '0 0 12px rgba(74, 222, 128, 0.5)',
+                  '0 0 20px rgba(74, 222, 128, 0.8)',
+                  '0 0 12px rgba(74, 222, 128, 0.5)',
+                ],
+              }}
+              transition={{ duration: 2, repeat: Infinity }}
+            />
           </div>
         </motion.div>
       </div>
     </section>
   );
 }
-

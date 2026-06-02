@@ -94,8 +94,44 @@ function TimelineCard({ exp, index }) {
 }
 
 export default function Experience() {
+  const orbs = [
+    { size: 300, x: '10%', y: '20%', color: '#7c5cfc' },
+    { size: 250, x: '70%', y: '60%', color: '#f75590' },
+    { size: 280, x: '50%', y: '80%', color: '#4f8ef7' },
+  ];
+
   return (
-    <section className="section" id="experience" style={{ textAlign: 'center' }}>
+    <section className="section" id="experience" style={{ textAlign: 'center', position: 'relative', overflow: 'hidden' }}>
+      <div style={{ position: 'absolute', inset: 0, zIndex: 0, pointerEvents: 'none' }}>
+        {orbs.map((orb, i) => (
+          <motion.div
+            key={i}
+            style={{
+              position: 'absolute',
+              width: orb.size,
+              height: orb.size,
+              borderRadius: '50%',
+              background: `radial-gradient(circle, ${orb.color}25 0%, transparent 70%)`,
+              left: orb.x,
+              top: orb.y,
+              filter: 'blur(70px)',
+            }}
+            animate={{
+              x: [0, 25, -18, 12, -22, 0],
+              y: [0, -18, 25, -12, 20, 0],
+              scale: [1, 1.15, 0.9, 1.1, 0.95, 1],
+            }}
+            transition={{
+              duration: 9 + i * 1.5,
+              repeat: Infinity,
+              delay: i * 0.4,
+              ease: 'easeInOut',
+            }}
+          />
+        ))}
+      </div>
+
+      <div style={{ position: 'relative', zIndex: 1 }}>
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -117,6 +153,7 @@ export default function Experience() {
         {experiences.map((exp, i) => (
           <TimelineCard key={exp.role} exp={exp} index={i} />
         ))}
+      </div>
       </div>
     </section>
   );

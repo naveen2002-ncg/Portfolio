@@ -87,12 +87,50 @@ function CertCard({ cert, index }) {
 }
 
 export default function Certifications() {
+  const orbs = [
+    { size: 300, x: '15%', y: '30%', color: '#c2a4ff' },
+    { size: 250, x: '65%', y: '50%', color: '#a855f7' },
+    { size: 200, x: '40%', y: '70%', color: '#7c5cfc' },
+  ];
+
   return (
     <section className="section" id="certifications" style={{
       textAlign: 'center',
       background: '#05020a',
       borderTop: '1px solid rgba(255,255,255,0.04)',
+      position: 'relative',
+      overflow: 'hidden',
     }}>
+      <div style={{ position: 'absolute', inset: 0, zIndex: 0, pointerEvents: 'none' }}>
+        {orbs.map((orb, i) => (
+          <motion.div
+            key={i}
+            style={{
+              position: 'absolute',
+              width: orb.size,
+              height: orb.size,
+              borderRadius: '50%',
+              background: `radial-gradient(circle, ${orb.color}20 0%, transparent 70%)`,
+              left: orb.x,
+              top: orb.y,
+              filter: 'blur(70px)',
+            }}
+            animate={{
+              x: [0, 20, -15, 10, -18, 0],
+              y: [0, -15, 20, -10, 15, 0],
+              scale: [1, 1.1, 0.95, 1.12, 0.9, 1],
+            }}
+            transition={{
+              duration: 10 + i * 1.5,
+              repeat: Infinity,
+              delay: i * 0.5,
+              ease: 'easeInOut',
+            }}
+          />
+        ))}
+      </div>
+
+      <div style={{ position: 'relative', zIndex: 1 }}>
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -114,6 +152,7 @@ export default function Certifications() {
         {certifications.map((cert, i) => (
           <CertCard key={cert.title} cert={cert} index={i} />
         ))}
+      </div>
       </div>
     </section>
   );
