@@ -48,12 +48,12 @@ export default function Hero() {
         margin: '0 auto',
         padding: '0 24px',
         display: 'grid',
-        gridTemplateColumns: '1fr 320px',
-        gap: '60px',
+        gridTemplateColumns: '1fr 300px',
+        gap: '50px',
         alignItems: 'center',
         position: 'relative',
         zIndex: 1,
-      }}>
+      }} className="hero-grid">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -148,3 +148,4 @@ export default function Hero() {
     </section>
   );
 }
+

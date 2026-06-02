@@ -1,4 +1,20 @@
+import { Canvas } from '@react-three/fiber';
+import { OrbitControls, Sphere } from '@react-three/drei';
 import { motion } from 'framer-motion';
+
+function BackgroundGridMesh() {
+  return (
+    <mesh rotation={[0, 0, 0]}>
+      <sphereGeometry args={[3, 30, 30]} />
+      <meshBasicMaterial 
+        color="#3b1d6e" 
+        wireframe 
+        transparent 
+        opacity={0.15} 
+      />
+    </mesh>
+  );
+}
 
 const techList = [
   { name: 'Python', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg' },
@@ -39,58 +55,123 @@ function TechBadge({ tech, index }) {
       whileInView={{ opacity: 1, scale: 1 }}
       viewport={{ once: true }}
       transition={{ duration: 0.3, delay: index * 0.03 }}
-      whileHover={{ scale: 1.04, y: -2 }}
-      className="tech-badge"
+      whileHover={{ scale: 1.05, y: -2 }}
+      style={{
+        display: 'inline-flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'center',
+        gap: '6px',
+        padding: '12px 8px',
+        width: '96px',
+        height: '96px',
+        borderRadius: '16px',
+        background: 'rgba(255, 255, 255, 0.01)',
+        border: '1px solid rgba(255, 255, 255, 0.03)',
+        backdropFilter: 'blur(12px)',
+        cursor: 'default',
+        transition: 'all 0.3s ease-out',
+      }}
     >
       <img
         src={tech.icon}
         alt={tech.name}
         loading="lazy"
-        className="tech-badge-icon"
+        style={{
+          width: '28px',
+          height: '28px',
+          objectFit: 'contain',
+          opacity: 0.5,
+          filter: 'grayscale(100%)',
+          transition: 'all 0.3s ease',
+        }}
         onError={(e) => { e.target.style.display = 'none'; }}
       />
-      <span className="tech-badge-label">{tech.name}</span>
+      <span style={{
+        fontSize: '0.68rem',
+        fontWeight: 500,
+        fontFamily: "'Fira Code', monospace",
+        color: '#8a8490',
+        transition: 'color 0.3s ease',
+        textAlign: 'center',
+        lineHeight: 1.2,
+      }}>{tech.name}</span>
     </motion.div>
   );
 }
 
 export default function Skills() {
   return (
-    <section className="section" id="skills" style={{
+    <section id="skills" style={{
       position: 'relative',
       overflow: 'hidden',
+      width: '100%',
+      background: '#05020a',
+      borderTop: '1px solid rgba(255,255,255,0.04)',
+      padding: '100px 0',
     }}>
-      <div className="bg-glow" style={{
+      <div style={{
         position: 'absolute',
-        top: '10%',
-        left: '20%',
-        width: '500px',
-        height: '500px',
-        background: 'radial-gradient(circle, rgba(168, 85, 247, 0.08) 0%, transparent 70%)',
+        inset: 0,
         zIndex: 0,
+        pointerEvents: 'none',
+        opacity: 0.5,
+      }}>
+        <Canvas camera={{ position: [0, 0, 5], fov: 60 }}>
+          <ambientLight intensity={0.5} />
+          <BackgroundGridMesh />
+          <OrbitControls 
+            enableZoom={false} 
+            enablePan={false} 
+            autoRotate 
+            autoRotateSpeed={0.8} 
+          />
+        </Canvas>
+      </div>
+
+      <div style={{
+        position: 'absolute',
+        inset: 0,
+        background: 'radial-gradient(circle at center, transparent 20%, #05020a 80%)',
+        zIndex: 10,
+        pointerEvents: 'none',
       }} />
 
-      <div style={{ position: 'relative', zIndex: 1 }}>
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5 }}
-          style={{ textAlign: 'center', marginBottom: '48px' }}
-        >
-          <h2 className="section-title" style={{ position: 'relative', zIndex: 2 }}>Skills & Tech Stack</h2>
-          <p className="section-subtitle" style={{ marginBottom: 0 }}>Technologies and tools I work with</p>
-        </motion.div>
+      <div style={{
+        position: 'absolute',
+        insetX: 0,
+        top: '5rem',
+        textAlign: 'center',
+        pointerEvents: 'none',
+        userSelect: 'none',
+        zIndex: 10,
+      }}>
+        <h2 style={{
+          fontSize: 'clamp(3rem, 8vw, 7rem)',
+          fontWeight: 900,
+          letterSpacing: '0.1em',
+          textTransform: 'uppercase',
+          color: 'rgba(9, 7, 12, 0.4)',
+          fontFamily: "'Geist', sans-serif",
+          lineHeight: 1,
+        }}>
+          TECH STACK
+        </h2>
+      </div>
 
+      <div style={{
+        maxWidth: '1000px',
+        margin: '0 auto',
+        padding: '0 24px',
+        position: 'relative',
+        zIndex: 20,
+        marginTop: '5rem',
+      }}>
         <div style={{
           display: 'flex',
           flexWrap: 'wrap',
           gap: '10px',
           justifyContent: 'center',
-          maxWidth: '1000px',
-          margin: '0 auto',
-          position: 'relative',
-          zIndex: 1,
         }}>
           {techList.map((tech, i) => (
             <TechBadge key={tech.name} tech={tech} index={i} />
