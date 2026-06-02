@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
@@ -14,8 +14,11 @@ export default function Navbar() {
   const navLinks = [
     { label: 'About', href: '#about' },
     { label: 'Experience', href: '#experience' },
+    { label: 'Education', href: '#education' },
     { label: 'Skills', href: '#skills' },
+    { label: 'Projects', href: '#projects' },
     { label: 'Certifications', href: '#certifications' },
+    { label: 'Achievements', href: '#achievements' },
     { label: 'Contact', href: '#contact' },
   ];
 
@@ -59,7 +62,7 @@ export default function Navbar() {
           display: 'flex',
           gap: '4px',
           alignItems: 'center',
-        }}>
+        }} className="desktop-nav">
           {navLinks.map(link => (
             <a
               key={link.label}
@@ -71,6 +74,7 @@ export default function Navbar() {
                 padding: '8px 16px',
                 borderRadius: '100px',
                 transition: 'all 0.3s',
+                whiteSpace: 'nowrap',
               }}
               onMouseEnter={(e) => {
                 e.target.style.color = 'var(--text-primary)';
@@ -110,26 +114,86 @@ export default function Navbar() {
         </button>
       </div>
 
+      <AnimatePresence>
+        {menuOpen && (
+          <motion.div
+            className="mobile-menu"
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            transition={{ duration: 0.3 }}
+            style={{
+              position: 'absolute',
+              top: '64px',
+              left: '16px',
+              right: '16px',
+              background: 'var(--bg-secondary)',
+              borderRadius: '16px',
+              border: '1px solid var(--border)',
+              boxShadow: '0 20px 60px rgba(0,0,0,0.5)',
+              overflowY: 'auto',
+              maxHeight: 'calc(100vh - 100px)',
+            }}
+          >
+            <div style={{
+              display: 'flex',
+              flexDirection: 'column',
+              padding: '16px',
+              gap: '4px',
+            }}>
+              {navLinks.map(link => (
+                <a
+                  key={link.label}
+                  href={link.href}
+                  onClick={() => setMenuOpen(false)}
+                  style={{
+                    fontSize: '0.9rem',
+                    fontWeight: 500,
+                    color: 'var(--text-secondary)',
+                    padding: '12px 16px',
+                    borderRadius: '12px',
+                    transition: 'all 0.3s',
+                    textDecoration: 'none',
+                  }}
+                  onMouseEnter={(e) => {
+                    e.target.style.color = 'var(--text-primary)';
+                    e.target.style.background = 'rgba(255,255,255,0.04)';
+                  }}
+                  onMouseLeave={(e) => {
+                    e.target.style.color = 'var(--text-secondary)';
+                    e.target.style.background = 'transparent';
+                  }}
+                >
+                  {link.label}
+                </a>
+              ))}
+              <a
+                href="mailto:naveen2002.ncg@gmail.com"
+                className="btn btn-primary"
+                style={{
+                  padding: '12px 20px',
+                  fontSize: '0.85rem',
+                  marginTop: '8px',
+                  textAlign: 'center',
+                  justifyContent: 'center',
+                }}
+                onClick={() => setMenuOpen(false)}
+              >
+                Hire Me
+              </a>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
       <style>{`
         @media (max-width: 768px) {
+          .desktop-nav { display: none !important; }
           .menu-toggle { display: block !important; }
-          nav > div:nth-child(1) > div:nth-child(2) {
-            display: none;
-          }
-          nav > div:nth-child(1) > div:nth-child(2).mobile-visible {
-            display: flex !important;
-            flex-direction: column;
-            position: absolute;
-            top: 64px;
-            left: 16px;
-            right: 16px;
-            background: var(--bg-secondary);
-            padding: 16px;
-            border-radius: 16px;
-            border: 1px solid var(--border);
-            gap: 4px;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.5);
-          }
+        }
+        @media (min-width: 769px) {
+          .menu-toggle { display: none !important; }
+          .mobile-menu { display: none !important; }
         }
       `}</style>
     </motion.nav>
