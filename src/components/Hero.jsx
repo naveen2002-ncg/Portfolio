@@ -69,7 +69,7 @@ export default function Hero() {
           </h1>
 
           <p className="hero-role" style={{ marginBottom: '20px' }}>
-            AI/ML Developer
+            AI/ML Engineer & Full Stack Developer
           </p>
 
           <p className="text-muted" style={{
@@ -78,7 +78,7 @@ export default function Hero() {
             marginBottom: '32px',
             lineHeight: 1.7,
           }}>
-            Building hands-on AI/ML projects with Python. Focused on creating real-world solutions through machine learning and automation.
+            Building hands-on AI/ML projects with Python. Learning full-stack web development with JavaScript, React, and SQL. Open to collaborations on AI, ML, and automation projects.
           </p>
 
           <div style={{

@@ -2,25 +2,25 @@ import { motion } from 'framer-motion';
 
 const experiences = [
   {
-    role: 'AI/ML Developer Intern',
-    company: 'SourceHub IT',
-    period: '2024 - Present',
-    description: 'Building AI-powered tools including FAQ chatbots and translation systems. Working with Python, NLP, and LLM integration.',
-    tags: ['Python', 'NLP', 'LLM', 'Chatbot'],
+    role: 'AI/ML Engineer Intern',
+    company: 'Rooman Technologies Pvt. Ltd.',
+    period: 'Dec 2024 - Feb 2025',
+    description: 'Worked with Python and Machine Learning. Developed AI-based applications. Learned OpenCV and computer vision fundamentals.',
+    tags: ['Python', 'Machine Learning', 'OpenCV', 'Computer Vision'],
   },
   {
-    role: 'Freelance Developer',
-    company: 'Self-Employed',
-    period: '2023 - Present',
-    description: 'Developing custom AI/ML solutions for clients. Focused on automation, data analysis, and deploying scalable ML applications.',
-    tags: ['Python', 'ML', 'Automation', 'API'],
+    role: 'Python Full Stack Trainee',
+    company: 'Fortune Cloud Technologies',
+    period: 'March 2026 - Present',
+    description: 'Learning frontend and backend development. Working with Python, JavaScript, SQL, HTML, and CSS. Building full-stack web applications.',
+    tags: ['Python', 'JavaScript', 'SQL', 'HTML', 'CSS', 'Full Stack'],
   },
   {
     role: 'Open Source Contributor',
-    company: 'GitHub',
+    company: 'GitHub / SourceHub IT',
     period: '2023 - Present',
-    description: 'Active contributor to AI/ML projects. Building hands-on projects focused on real-world problem solving with machine learning.',
-    tags: ['Open Source', 'Python', 'Projects'],
+    description: 'Completed 4 AI Projects under SourceHub IT. Active contributor with 15+ repositories. Focused on building working AI/ML projects rather than chasing certificates.',
+    tags: ['Python', 'AI/ML', 'Open Source', 'NLP'],
   },
 ];
 

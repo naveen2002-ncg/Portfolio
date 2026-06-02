@@ -3,10 +3,11 @@ import { motion } from 'framer-motion';
 const education = [
   {
     degree: 'Bachelor of Engineering',
-    field: 'Computer Science',
-    institution: 'Andhra University',
-    period: '2020 - 2024',
-    description: 'Focused on core computer science fundamentals, algorithms, and software engineering principles.',
+    field: 'Computer Science & Engineering',
+    institution: 'Jain College of Engineering and Technology',
+    period: '2021 - 2025',
+    cgpa: '7.23',
+    coursework: ['Data Structures', 'Database Management Systems', 'Machine Learning', 'Artificial Intelligence', 'Software Engineering'],
   },
 ];
 
@@ -61,11 +62,36 @@ function EduCard({ item, index }) {
         marginBottom: '8px',
       }}>{item.field} · {item.institution}</p>
 
+      <div style={{
+        display: 'inline-flex',
+        alignItems: 'center',
+        gap: '6px',
+        padding: '4px 12px',
+        borderRadius: '100px',
+        background: 'var(--accent-soft)',
+        border: '1px solid rgba(168, 85, 247, 0.15)',
+        marginBottom: '12px',
+      }}>
+        <span style={{ fontSize: '0.78rem', color: 'var(--accent)', fontWeight: 600 }}>CGPA: {item.cgpa}</span>
+      </div>
+
       <p style={{
-        fontSize: '0.88rem',
+        fontSize: '0.85rem',
         color: 'var(--text-secondary)',
         lineHeight: 1.65,
-      }}>{item.description}</p>
+        marginBottom: '14px',
+      }}>Relevant Areas:</p>
+
+      <div style={{
+        display: 'flex',
+        flexWrap: 'wrap',
+        gap: '6px',
+        justifyContent: 'center',
+      }}>
+        {item.coursework.map(course => (
+          <span key={course} className="tag">{course}</span>
+        ))}
+      </div>
     </motion.div>
   );
 }
@@ -74,7 +100,6 @@ export default function Education() {
   return (
     <section className="section" id="education" style={{
       textAlign: 'center',
-      background: 'linear-gradient(180deg, #05020a 0%, #0b080c 100%)',
     }}>
       <motion.div
         initial={{ opacity: 0, y: 20 }}
@@ -98,38 +123,6 @@ export default function Education() {
           <EduCard key={item.degree} item={item} index={i} />
         ))}
       </div>
-
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.5, delay: 0.3 }}
-        style={{
-          marginTop: '40px',
-          maxWidth: '500px',
-          margin: '40px auto 0',
-        }}
-        className="glass-card"
-      >
-        <h3 style={{
-          fontSize: '0.95rem',
-          fontWeight: 600,
-          color: 'var(--text-primary)',
-          marginBottom: '16px',
-          textTransform: 'uppercase',
-          letterSpacing: '0.06em',
-        }}>Key Coursework</h3>
-        <div style={{
-          display: 'flex',
-          flexWrap: 'wrap',
-          gap: '8px',
-          justifyContent: 'center',
-        }}>
-          {['Data Structures', 'Algorithms', 'DBMS', 'OS', 'Networks', 'Machine Learning', 'Python', 'OOP'].map(course => (
-            <span key={course} className="tag">{course}</span>
-          ))}
-        </div>
-      </motion.div>
     </section>
   );
 }

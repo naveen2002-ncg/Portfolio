@@ -1,30 +1,11 @@
 import { motion } from 'framer-motion';
 
 const certifications = [
-  {
-    title: 'Python for Data Science',
-    issuer: 'NPTEL / IIT',
-    date: '2024',
-    credentialId: 'NPTEL-2024-PY',
-  },
-  {
-    title: 'Machine Learning Fundamentals',
-    issuer: 'Coursera',
-    date: '2024',
-    credentialId: 'ML-2024-CR',
-  },
-  {
-    title: 'Full Stack Web Development',
-    issuer: 'FreeCodeCamp',
-    date: '2023',
-    credentialId: 'FCC-2023-FS',
-  },
-  {
-    title: 'Artificial Intelligence Basics',
-    issuer: 'IBM Skills',
-    date: '2023',
-    credentialId: 'IBM-2023-AI',
-  },
+  { title: 'Google Cloud Generative AI', issuer: 'Google Cloud', date: '2025', id: 'GC-2025-GA' },
+  { title: 'Large Language Models', issuer: 'Google Cloud', date: '2025', id: 'GC-2025-LLM' },
+  { title: 'Power BI', issuer: 'Microsoft', date: '2024', id: 'MS-2024-PBI' },
+  { title: 'R Programming', issuer: 'Coursera', date: '2024', id: 'CR-2024-R' },
+  { title: 'AI/ML Fundamentals', issuer: 'IBM Skills', date: '2024', id: 'IBM-2024-AI' },
 ];
 
 function CertCard({ cert, index }) {
@@ -34,7 +15,7 @@ function CertCard({ cert, index }) {
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
-      transition={{ duration: 0.4, delay: index * 0.1 }}
+      transition={{ duration: 0.4, delay: index * 0.08 }}
       whileHover={{ y: -4, boxShadow: '0 0 20px rgba(168,85,247,0.15), 0 20px 60px rgba(0,0,0,0.3)' }}
       style={{
         display: 'flex',
@@ -69,14 +50,14 @@ function CertCard({ cert, index }) {
         </div>
         <div>
           <h3 style={{
-            fontSize: '0.95rem',
+            fontSize: '0.92rem',
             fontWeight: 600,
             color: 'var(--text-primary)',
             marginBottom: '2px',
             lineHeight: 1.3,
           }}>{cert.title}</h3>
           <p style={{
-            fontSize: '0.8rem',
+            fontSize: '0.78rem',
             color: 'var(--accent)',
             fontWeight: 500,
           }}>{cert.issuer}</p>
@@ -91,13 +72,14 @@ function CertCard({ cert, index }) {
         borderTop: '1px solid var(--border)',
       }}>
         <span style={{
-          fontSize: '0.72rem',
+          fontSize: '0.7rem',
           color: 'var(--text-secondary)',
           fontFamily: "'Fira Code', monospace",
-        }}>{cert.credentialId}</span>
+        }}>{cert.id}</span>
         <span style={{
-          fontSize: '0.72rem',
+          fontSize: '0.7rem',
           color: 'var(--text-secondary)',
+          fontWeight: 500,
         }}>{cert.date}</span>
       </div>
     </motion.div>
@@ -123,10 +105,10 @@ export default function Certifications() {
       </motion.div>
 
       <div style={{
-        maxWidth: '600px',
+        maxWidth: '700px',
         margin: '0 auto',
         display: 'grid',
-        gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))',
+        gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))',
         gap: '16px',
       }}>
         {certifications.map((cert, i) => (
