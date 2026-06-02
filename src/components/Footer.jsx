@@ -1,60 +1,4 @@
-export default function Footer() {
-  return (
-    <footer style={{
-      padding: '48px 0 32px',
-      borderTop: '1px solid var(--border)',
-      textAlign: 'center',
-    }}>
-      <div style={{
-        maxWidth: '1200px',
-        margin: '0 auto',
-        padding: '0 24px',
-      }}>
-        <h3 style={{
-          fontSize: '1.3rem',
-          fontWeight: 700,
-          marginBottom: '16px',
-          background: 'linear-gradient(135deg, var(--gradient-1), var(--gradient-2))',
-          WebkitBackgroundClip: 'text',
-          WebkitTextFillColor: 'transparent',
-          backgroundClip: 'text',
-        }}>
-          Naveen C Gundapalli
-        </h3>
-        <p style={{
-          color: 'var(--text-secondary)',
-          fontSize: '0.9rem',
-          marginBottom: '24px',
-          maxWidth: '450px',
-          margin: '0 auto 24px',
-        }}>
-          Building AI/ML projects with Python. Focused on creating real-world solutions through hands-on development.
-        </p>
-
-        <div style={{
-          display: 'flex',
-          gap: '16px',
-          justifyContent: 'center',
-          marginBottom: '28px',
-        }}>
-          <SocialIcon href="https://github.com/naveen2002-ncg" label="GitHub" icon="github" />
-          <SocialIcon href="https://www.linkedin.com/in/naveen-c-gundapalli-bb56b824b" label="LinkedIn" icon="linkedin" />
-        </div>
-
-        <p style={{
-          fontSize: '0.85rem',
-          color: 'var(--text-secondary)',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          gap: '6px',
-        }}>
-          Made with ♥ by Naveen C Gundapalli • 2026
-        </p>
-      </div>
-    </footer>
-  );
-}
+import { motion } from 'framer-motion';
 
 function SocialIcon({ href, label, icon }) {
   const svg = icon === 'github'
@@ -62,7 +6,7 @@ function SocialIcon({ href, label, icon }) {
     : `<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg>`;
 
   return (
-    <a
+    <motion.a
       href={href}
       target="_blank"
       rel="noopener noreferrer"
@@ -71,23 +15,70 @@ function SocialIcon({ href, label, icon }) {
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
-        width: '44px',
-        height: '44px',
+        width: '40px',
+        height: '40px',
         borderRadius: '50%',
-        background: 'var(--bg-card)',
-        border: '1px solid var(--border)',
+        background: 'transparent',
+        border: '1px solid rgba(255, 255, 255, 0.08)',
         color: 'var(--text-secondary)',
         transition: 'all 0.3s',
       }}
-      onMouseEnter={(e) => {
-        e.currentTarget.style.borderColor = 'var(--accent)';
-        e.currentTarget.style.color = 'var(--accent)';
-      }}
-      onMouseLeave={(e) => {
-        e.currentTarget.style.borderColor = 'var(--border)';
-        e.currentTarget.style.color = 'var(--text-secondary)';
-      }}
+      whileHover={{ scale: 1.1, borderColor: 'rgba(194, 164, 255, 0.3)', color: 'var(--accent)' }}
+      whileTap={{ scale: 0.95 }}
       dangerouslySetInnerHTML={{ __html: svg }}
     />
+  );
+}
+
+export default function Footer() {
+  return (
+    <footer style={{
+      padding: '48px 0 32px',
+      borderTop: '1px solid var(--border)',
+      textAlign: 'center',
+    }}>
+      <div style={{
+        maxWidth: '600px',
+        margin: '0 auto',
+        padding: '0 24px',
+      }}>
+        <motion.h3
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          style={{
+            fontSize: '1.2rem',
+            fontWeight: 600,
+            marginBottom: '12px',
+            color: 'var(--text-primary)',
+          }}
+        >
+          Naveen C Gundapalli
+        </motion.h3>
+        <p className="text-muted" style={{
+          fontSize: '0.85rem',
+          marginBottom: '20px',
+          lineHeight: 1.6,
+        }}>
+          Building AI/ML projects with Python. Focused on creating real-world solutions.
+        </p>
+
+        <div style={{
+          display: 'flex',
+          gap: '12px',
+          justifyContent: 'center',
+          marginBottom: '24px',
+        }}>
+          <SocialIcon href="https://github.com/naveen2002-ncg" label="GitHub" icon="github" />
+          <SocialIcon href="https://www.linkedin.com/in/naveen-c-gundapalli-bb56b824b" label="LinkedIn" icon="linkedin" />
+        </div>
+
+        <p className="text-muted" style={{
+          fontSize: '0.75rem',
+        }}>
+          Made with care by Naveen C Gundapalli · 2026
+        </p>
+      </div>
+    </footer>
   );
 }
